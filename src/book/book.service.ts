@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Book } from './model/book.model';
 import { Model } from 'mongoose';
 import { CreateBookInput } from './dto/create.book.input';
-import { updateBookInput } from './dto/update.book.input';
+import { UpdateBookInput } from './dto/update.book.input';
 
 @Injectable()
 export class BookService {
@@ -25,7 +25,7 @@ export class BookService {
         return book;
     }
 
-    async updateBookDetial(input: updateBookInput): Promise<Book> {
+    async updateBookDetial(input: UpdateBookInput): Promise<Book> {
         const existingBook = await this.bookModel.findById(input.id);
         if (!existingBook) throw new NotFoundException('Book Not Found')
         Object.assign(existingBook, input);
